@@ -1,4 +1,4 @@
-# iac-automation-terraform
+# Terraform End-to-End Automation Project
 
 complete project implementation by using "https://medium.com/@kazeemmayeed/end-to-end-automation-with-terraform-a-devops-engineers-guide-to-infrastructure-as-code-48783891fcb1"
 
@@ -60,11 +60,8 @@ chmod +x deploy.sh
 
 
 
-\# ============================================================================
-
-\# WHAT THIS CREATES:
-
-\# ============================================================================
+## Overview
+This project deploys a fully automated AWS infrastructure with multi-environment support, including:
 
 \# VPC with public/private subnets across 2 AZs
 
