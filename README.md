@@ -1,91 +1,106 @@
 # Terraform End-to-End Automation Project
 
-complete project implementation by using "https://medium.com/@kazeemmayeed/end-to-end-automation-with-terraform-a-devops-engineers-guide-to-infrastructure-as-code-48783891fcb1"
+A complete implementation of Infrastructure as Code (IaC) using [Terraform](https://www.terraform.io/), inspired by [this Medium guide](https://medium.com/@kazeemmayeed/end-to-end-automation-with-terraform-a-devops-engineers-guide-to-infrastructure-as-code-48783891fcb1).
 
+---
 
+## 🚀 Project Overview
 
-\# ============================================================================
+This project automates the deployment of a robust AWS infrastructure with support for multiple environments (`dev` and `prod`). Key features include:
 
-\# INSTRUCTIONS TO USE THIS PROJECT
+- **VPC** with public and private subnets across 2 Availability Zones
+- **Internet Gateway** and **NAT Gateways**
+- **Auto Scaling Group** with 2 EC2 instances
+- **Application Load Balancer**
+- **Security Groups** with strict access rules
+- **IAM Roles** for EC2 instances
+- **Custom Web Page** indicating deployment success
+- **Remote State** management in S3 with DynamoDB locking
+- **Multi-environment** support (`dev` and `prod`)
+- **Jenkins CI/CD** pipeline ready
+- **Resource Tagging** for easy management
+- **Health Checks** and **Auto-scaling**
 
-\# ============================================================================
+---
 
+## 📝 Getting Started
 
+Follow these steps to set up and deploy the infrastructure:
 
-\# STEP 1: Create the directory structure
+### 1. Create the Directory Structure
 
+```bash
 mkdir -p terraform-project/{modules/{network,compute},environments/{dev,prod}}
+```
 
+### 2. Organize the Files
 
+- **Root files:** Place in `terraform-project/`
+- **Network module:** Place in `terraform-project/modules/network/`
+- **Compute module:** Place in `terraform-project/modules/compute/`
+- **Environment files:** Place in `terraform-project/environments/dev/` and `terraform-project/environments/prod/`
 
-\# STEP 2: Copy each section above to the appropriate files:
+### 3. Set Up AWS Resources
 
-\# - Root files go in terraform-project/
-
-\# - Network module files go in terraform-project/modules/network/
-
-\# - Compute module files go in terraform-project/modules/compute/
-
-\# - Environment files go in terraform-project/environments/{dev,prod}/
-
-
-
-\# STEP 3: Set up AWS resources
-
+```bash
 cd terraform-project
-
 chmod +x setup.sh
-
 ./setup.sh
+```
 
+### 4. Configure Remote State
 
+Update the S3 bucket name in `backend.tf` with the bucket created by `setup.sh`.
 
-\# STEP 4: Update the S3 bucket name in backend.tf with the one created by setup.sh
+### 5. Deploy the Infrastructure
 
-
-
-\# STEP 5: Deploy
-
+```bash
 chmod +x deploy.sh
+./deploy.sh 
+```
 
-./deploy.sh dev plan      # Plan the deployment
+```bash
+Enter environment (dev/prod): dev
+Enter action (plan/apply/destroy): plan
+```
 
-./deploy.sh dev apply     # Deploy to dev environment
+### 6. Access Your Application
 
+After deployment, the script will output the Load Balancer URL. Open it in your browser to view the deployed web page.
 
+---
 
-\# STEP 6: Access your website
+## 📂 Directory Structure
 
-\# The script will output the load balancer URL at the end
+```
+terraform-project/
+├── modules/
+│   ├── network/
+│   └── compute/
+├── environments/
+│   ├── dev/
+│   └── prod/
+├── setup.sh
+├── deploy.sh
+├── backend.tf
+└── ...
+```
 
+---
 
+## 🛠️ Prerequisites
 
-## Overview
-This project deploys a fully automated AWS infrastructure with multi-environment support, including:
+- [Terraform](https://www.terraform.io/downloads.html) installed
+- AWS CLI configured with appropriate credentials
+- Bash shell
 
-\# VPC with public/private subnets across 2 AZs
+---
 
-\# Internet Gateway and NAT Gateways
+## 📢 Notes
 
-\# Auto Scaling Group with 2 EC2 instances
+- Ensure your AWS credentials have sufficient permissions to create the required resources.
+- For production deployments, review and adjust security group rules and IAM policies as needed.
 
-\# Application Load Balancer
+---
 
-\# Security Groups with proper access rules
-
-\# IAM roles for EC2 instances
-
-\# Beautiful web page showing deployment success
-
-\# Remote state in S3 with DynamoDB locking
-
-\# Multi-environment support (dev/prod)
-
-\# Jenkins CI/CD pipeline ready
-
-\# Proper resource tagging
-
-\# Health checks and auto-scaling
-
-
-
+Happy Automating! 🚀

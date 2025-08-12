@@ -1,9 +1,11 @@
 terraform {
   backend "s3" {
-    bucket         = "my-terraform-state-bucket-12345"  # CHANGE THIS TO YOUR UNIQUE BUCKET NAME
+    # bucket         = "my-terraform-state-bucket-12345"  # CHANGE THIS TO YOUR UNIQUE BUCKET NAME
+    bucket         = "devops-directive-tf-state-vicky-mac"
     key            = "infrastructure/terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "terraform-lock-table"
+    # dynamodb_table = "terraform-lock-table"
+    dynamodb_table = "terraform-state-locking" # CHANGE THIS TO YOUR DYNAMODB TABLE
     encrypt        = true
   }
   

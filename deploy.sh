@@ -1,13 +1,33 @@
 #!/bin/bash
 set -e
 
-ENVIRONMENT=${1:-dev}
-ACTION=${2:-plan}
+# Prompt for environment if not provided
+if [ -z "$1" ]; then
+    read -p "Enter environment (dev/prod): " ENVIRONMENT
+else
+    ENVIRONMENT=$1
+fi
+
+# Validate environment input
+if [[ "$ENVIRONMENT" != "dev" && "$ENVIRONMENT" != "prod" ]]; then
+    echo "Invalid environment. Please enter 'dev' or 'prod'."
+    exit 1
+fi
+
+# Prompt for action if not provided
+if [ -z "$2" ]; then
+    read -p "Enter action (plan/apply/destroy): " ACTION
+else
+    ACTION=$2
+fi
+
+# Validate action input
+if [[ "$ACTION" != "plan" && "$ACTION" != "apply" && "$ACTION" != "destroy" ]]; then
+    echo "Invalid action. Please enter 'plan', 'apply', or 'destroy'."
+    exit 1
+fi
 
 echo "Deploying to $ENVIRONMENT environment..."
-
-# Navigate to project directory
-cd terraform-project
 
 # Initialize Terraform
 terraform init
@@ -26,9 +46,5 @@ case $ACTION in
         ;;
     destroy)
         terraform destroy -var-file="environments/${ENVIRONMENT}/terraform.tfvars" -auto-approve
-        ;;
-    *)
-        echo "Usage: $0 [dev|prod] [plan|apply|destroy]"
-        exit 1
         ;;
 esac
