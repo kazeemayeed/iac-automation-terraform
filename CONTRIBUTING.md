@@ -6,7 +6,7 @@ Please review and follow these guidelines before submitting changes.
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 - `modules/` → Reusable Terraform modules (e.g., networking, compute, IAM).  
 - `environments/` → Environment-specific configs (`dev/`, `stage/`, `prod/`).  
 - `pipelines/` → CI/CD workflows for validate, plan, and apply.  
