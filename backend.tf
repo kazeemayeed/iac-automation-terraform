@@ -8,14 +8,16 @@ terraform {
 #    dynamodb_table = "terraform-state-locking" # CHANGE THIS TO YOUR DYNAMODB TABLE
 #    encrypt        = true
 #  }
-  
+
+
   required_version = ">= 1.0"
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.0"
-    }
-  }
+## provider defined in main.tf
+ # required_providers {
+ #   aws = {
+ #     source  = "hashicorp/aws"
+ #     version = "~> 5.0"
+ #   }
+ # }
 }
 
 # File: provider.tf
